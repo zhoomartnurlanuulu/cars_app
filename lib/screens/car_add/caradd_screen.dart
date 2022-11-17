@@ -40,95 +40,98 @@ class _CarAddingState extends State<CarAdding> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            CarsTextField(
-              OnChanged: (v) {
-                checkValidation();
-              },
-              controller: nameContreller,
-              keyboard: TextInputType.text,
-              maxLength: 100,
-              label: 'Марка',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarsTextField(
-              OnChanged: (v) {
-                checkValidation();
-              },
-              controller: modelContreller,
-              maxLength: 100,
-              keyboard: TextInputType.text,
-              label: 'Модель',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarsTextField(
-              OnChanged: (v) {
-                checkValidation();
-              },
-              controller: yearContreller,
-              maxLength: 4,
-              keyboard: TextInputType.number,
-              label: 'Год',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarsTextField(
-              OnChanged: (v) {
-                checkValidation();
-              },
-              controller: volumeContreller,
-              maxLength: 3,
-              keyboard: TextInputType.datetime,
-              label: 'Объем ',
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CarsTextField(
-              OnChanged: (v) {
-                checkValidation();
-              },
-              controller: priceContreller,
-              keyboard: TextInputType.datetime,
-              label: 'Цена',
-              maxLength: 10,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ValueListenableBuilder(
-                valueListenable: isCamera,
-                child: const SizedBox(
-                  height: 15,
+        child: ListView(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CarsTextField(
+                  OnChanged: (v) {
+                    checkValidation();
+                  },
+                  controller: nameContreller,
+                  keyboard: TextInputType.text,
+                  maxLength: 100,
+                  label: 'Марка',
                 ),
-                builder: (context, value, child) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Visibility(
-                        visible: isCamera.value,
-                        replacement: CarsTextField(
-                          OnChanged: (e) {
-                            checkValidation();
-                          },
-                          controller: linkContreller,
-                          keyboard: TextInputType.text,
-                          maxLength: 100000000,
-                          label: 'Ссылка на фото',
-                        ),
-                        child: SizedBox(
-                          height: 55,
-                          child: Row(
-                            children: [
-                              AppButton(
-                                  onPressed: () {
-                                    showBottomSheet(
+                const SizedBox(
+                  height: 20,
+                ),
+                CarsTextField(
+                  OnChanged: (v) {
+                    checkValidation();
+                  },
+                  controller: modelContreller,
+                  maxLength: 100,
+                  keyboard: TextInputType.text,
+                  label: 'Модель',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CarsTextField(
+                  OnChanged: (v) {
+                    checkValidation();
+                  },
+                  controller: yearContreller,
+                  maxLength: 4,
+                  keyboard: TextInputType.number,
+                  label: 'Год',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CarsTextField(
+                  OnChanged: (v) {
+                    checkValidation();
+                  },
+                  controller: volumeContreller,
+                  maxLength: 3,
+                  keyboard: TextInputType.datetime,
+                  label: 'Объем',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                CarsTextField(
+                  OnChanged: (v) {
+                    checkValidation();
+                  },
+                  controller: priceContreller,
+                  keyboard: TextInputType.datetime,
+                  label: 'Цена',
+                  maxLength: 10,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ValueListenableBuilder(
+                  valueListenable: isCamera,
+                  child: const SizedBox(
+                    height: 15,
+                  ),
+                  builder: (context, value, child) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: isCamera.value,
+                          replacement: CarsTextField(
+                            OnChanged: (e) {
+                              checkValidation();
+                            },
+                            controller: linkContreller,
+                            keyboard: TextInputType.text,
+                            maxLength: 100000000,
+                            label: 'Ссылка на фото',
+                          ),
+                          child: SizedBox(
+                            height: 55,
+                            child: Row(
+                              children: [
+                                AppButton(
+                                    onPressed: () {
+                                      showBottomSheet(
                                         context: context,
                                         builder: (context) {
                                           return Container(
@@ -140,95 +143,97 @@ class _CarAddingState extends State<CarAdding> {
                                                 const Text(
                                                     'Выберите способ добавление фото:'),
                                                 ElevatedButton(
-                                                    onPressed: () async {
-                                                      _image = await _picker
-                                                          .pickImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .camera);
-                                                      imageFile =
-                                                          File(_image!.path);
-                                                      // ignore: use_build_context_synchronously
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child:
-                                                        const Text('Камера')),
+                                                  onPressed: () async {
+                                                    _image =
+                                                        await _picker.pickImage(
+                                                            source: ImageSource
+                                                                .camera);
+                                                    imageFile =
+                                                        File(_image!.path);
+                                                    // ignore: use_build_context_synchronously
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text('Камера'),
+                                                ),
                                                 const Text('Или'),
                                                 ElevatedButton(
-                                                    onPressed: () async {
-                                                      _image = await _picker
-                                                          .pickImage(
-                                                              source:
-                                                                  ImageSource
-                                                                      .gallery);
-                                                      imageFile =
-                                                          File(_image!.path);
-                                                      // ignore: use_build_context_synchronously
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child:
-                                                        const Text('Галерея')),
+                                                  onPressed: () async {
+                                                    _image =
+                                                        await _picker.pickImage(
+                                                            source: ImageSource
+                                                                .gallery);
+                                                    imageFile =
+                                                        File(_image!.path);
+                                                    // ignore: use_build_context_synchronously
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text('Галерея'),
+                                                ),
                                                 const SizedBox(
                                                   height: 20,
                                                 ),
                                               ],
                                             ),
                                           );
-                                        });
-                                  },
-                                  isFullFilled: true,
-                                  isLoading: false),
-                              const SizedBox(
-                                width: 24,
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  image: imageFile != null
-                                      ? DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: FileImage(imageFile!),
-                                        )
-                                      : const DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              "https://img.lovepik.com/free-png/20210926/lovepik-car-icon-png-image_401452256_wh1200.png")),
+                                        },
+                                      );
+                                    },
+                                    isFullFilled: true,
+                                    isLoading: false),
+                                const SizedBox(
+                                  width: 24,
                                 ),
-                                width: 55,
-                              ),
-                            ],
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    borderRadius: BorderRadius.circular(12),
+                                    image: imageFile != null
+                                        ? DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(imageFile!),
+                                          )
+                                        : const DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                                "https://img.lovepik.com/free-png/20210926/lovepik-car-icon-png-image_401452256_wh1200.png")),
+                                  ),
+                                  width: 55,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      child!,
-                      Row(
-                        children: [
-                          Switch.adaptive(
+                        child!,
+                        Row(
+                          children: [
+                            Switch.adaptive(
                               value: isCamera.value,
                               onChanged: (value) {
                                 isCamera.value = !isCamera.value;
-                              }),
-                          const Text('Добавление фото с телефона'),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                }),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-                width: 500,
-                height: 50,
-                child: BlocBuilder<CarsBloc, CarsState>(
-                  builder: (context, state) {
-                    return ValueListenableBuilder(
-                        valueListenable: isFullFilled,
-                        builder: (context, _, __) {
-                          return AppButton(
+                              },
+                            ),
+                            const Text('Добавление фото с телефона'),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                    width: 500,
+                    height: 50,
+                    child: BlocBuilder<CarsBloc, CarsState>(
+                      builder: (context, state) {
+                        return ValueListenableBuilder(
+                          valueListenable: isFullFilled,
+                          builder: (context, _, __) {
+                            return AppButton(
                               isFullFilled: isFullFilled.value,
                               isLoading: state is CarsLoadState,
                               onPressed: () {
@@ -241,14 +246,19 @@ class _CarAddingState extends State<CarAdding> {
                                   volume: double.parse(volumeContreller.text),
                                   price: double.parse(priceContreller.text),
                                 );
-                                BlocProvider.of<CarsBloc>(context)
-                                    .add(AddCars(cars));
-                              });
-                        });
-                  },
-                )),
-          ]),
-        ]),
+                                BlocProvider.of<CarsBloc>(context).add(
+                                  AddCars(cars),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    )),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -15,7 +15,7 @@
 	<key>CFBundleName</key>
 	<string>task2</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-<key>NSCameraUsageDescription</key>
+    <key>NSCameraUsageDescription</key>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
